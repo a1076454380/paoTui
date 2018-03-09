@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/base.css" />
+		<script src="css/rem.js" type="text/javascript" charset="utf-8"></script>
+		<script src="https://cdn.bootcss.com/vue/2.5.9/vue.min.js"></script>
+		<script src="js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<div class="index" id="app">
+			<div class="main">
+				<div class="top">
+					<div class="userimg" style="display: flex;justify-content: flex-start;text-indent:0">
+						<span class="mui-icon mui-icon-arrowleft mui-action-back"></span>
+					</div>
+					<div class="adress">
+						常用地址添加
+					</div>
+					<div class="order" @click="godelete">
+						管理
+					</div>
+				</div>
+				<div class="main alway">
+					<div class="alway-item" @click="opennew('home')">
+						<div class="alway-img">
+							<img src="img/home.png"/>
+						</div>
+						<div class="alway-main">
+							<div class="alway-title">
+								家的位置
+							</div>
+							<div class="alway-text">
+								未设置
+							</div>
+							
+						</div>
+						<div class="alway-delete" v-show="mydelete">
+								清空
+							</div>
+					</div>
+					<div class="alway-item" @click="opennew('home')">
+						<div class="alway-img">
+							<img src="img/company.png"/>
+						</div>
+						<div class="alway-main">
+							<div class="alway-title">
+								公司的位置
+							</div>
+							<div class="alway-text">
+								未设置
+							</div>
+							
+						</div>
+						<div class="alway-delete" v-show="mydelete">
+								清空
+							</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var myvue=new Vue({
+			el:'#app',
+			data:{
+				mydelete:false
+			},
+			methods:{
+				godelete:function(){
+					this.mydelete=!this.mydelete
+					console.log(this.delete)
+				},
+				opennew:function(target){
+					mui.openWindow({
+						url:target+'.html',
+						id:target
+					})
+				}
+			}
+		})
+	</script>
+</html>

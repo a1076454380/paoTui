@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/base.css" />
+		<script src="css/rem.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<script type="text/javascript">
+		function plusReady() {
+			// 获取支付通道
+			plus.payment.getChannels(function(channels) {
+				that.channel = channels[0];
+			}, function(e) {
+				alert("获取支付通道失败：" + e.message);
+			});
+		}
+		if(window.plus) {
+			plusReady();
+		} else {
+			document.addEventListener('plusready', plusReady, false);
+		}
+		var that = this
+		var ALIPAYSERVER = myurl + '/MemberCreateAliPay?menberLevel=' + that.name + '&shoppingUserId=' + localStorage.getItem('userid') + '&memberId=' + that.id + '&price=' + that.money + '&timeLimit=' + that.timeLimit;
+		var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function() {
+			switch(xhr.readyState) {
+				case 4:
+					if(xhr.status == 200) {
+						plus.payment.request(that.channel, xhr.responseText, function(result) {
+							plus.nativeUI.alert("支付成功！", function() {
+								mui.openWindow({
+									url: 'payment.html',
+									id: 'payment'
+								})
+							});
+						}, function(error) {
+							plus.nativeUI.alert("支付失败：" + error.code);
+						});
+					} else {
+						alert("获取订单信息失败！");
+					}
+					break;
+				default:
+					break;
+			}
+		}
+		xhr.open('POST', ALIPAYSERVER);
+		xhr.send();
+	</script>
+
+	<body>
+		<div id="app" class="index charge">
+			<div class="main">
+				<div class="top">
+					<div class="back">
+						<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+					</div>
+					<div class="adress">
+						充值
+					</div>
+					<div class="order">
+						解除保证金
+					</div>
+				</div>
+				<div id="content">
+					<div class="charge-tab">
+						<div class="tab-item">
+							<div class="tab-moey">
+								0.8
+							</div>
+							<div class="tab-text">
+								账户余额
+							</div>
+						</div>
+						<div class="tab-item">
+							<div class="tab-moey">
+								2000
+							</div>
+							<div class="tab-text">
+								冻结保证金
+							</div>
+						</div>
+					</div>
+					<input type="number" name="" id="" placeholder="请输入充值\提现金额" />
+					<div class="button">
+						提现
+					</div>
+					<div class="button">
+						充值
+					</div>
+					<div class="button">
+						缴纳保证金
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/base.css" />
+		<script src="css/rem.js" type="text/javascript" charset="utf-8"></script>
+		<script src="https://cdn.bootcss.com/vue/2.5.9/vue.min.js"></script>
+		<script src="js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<div id="app" class="take ratings">
+			<div class="take-top">
+				<div class="back">
+					<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+				</div>
+				<div class="top-main">
+					我的订单
+				</div>
+				<div class="price">
+					投诉订单
+				</div>
+			</div>
+			<div class="take-main">
+				<div class="ratings-group">
+					<div class="ratings-title">
+						起点:
+					</div>
+					<div class="ratings-text">
+						徐州市
+					</div>
+				</div>
+				<div class="ratings-group">
+					<div class="ratings-title">
+						终点:
+					</div>
+					<div class="ratings-text">
+						徐州市
+					</div>
+				</div>
+				<div class="ratings-group">
+					<div class="ratings-title">
+						订单类型:
+					</div>
+					<div class="ratings-text">
+						咖啡
+					</div>
+				</div>
+				<div class="ratings-group">
+					<div class="ratings-title">
+						订单时间:
+					</div>
+					<div class="ratings-text">
+						2017-05-04 06:00
+					</div>
+				</div>
+				<div class="ratings-group">
+					<div class="ratings-title">
+						订单备注:
+					</div>
+					<div class="ratings-text">
+						越快越好
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var myvue = new Vue({
+			el: '#app',
+			data: {
+				qhuo: localStorage.getItem('qhuo'),
+				qhuodetail: localStorage.getItem('qhuodetail'),
+				qhuoiphone: localStorage.getItem('qhuoiphone'),
+				qhuoname: localStorage.getItem('qhuoname'),
+				shuo: localStorage.getItem('shuo'),
+				shuodetail: localStorage.getItem('shuodetail'),
+				shuoiphone: localStorage.getItem('shuoiphone'),
+				shuoname: localStorage.getItem('shuoname'),
+				com: false,
+				mytype: '',
+				time:'2016-01-11T16:00:00'
+			},
+			methods: {
+
+			},
+			mounted:function(){
+
+			}
+		})
+	</script>
+
+</html>

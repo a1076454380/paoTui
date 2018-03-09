@@ -1,0 +1,121 @@
+/* reset */
+html,body,h1,h2,h3,h4,h5,h6,div,dl,dt,dd,ul,ol,li,p,blockquote,pre,hr,figure,table,caption,th,td,form,fieldset,legend,input,button,textarea,menu{margin:0;padding:0;}
+header,footer,section,article,aside,nav,hgroup,address,figure,figcaption,menu,details{display:block;}
+table{border-collapse:collapse;border-spacing:0;}
+caption,th{text-align:left;font-weight:normal;}
+html,body,fieldset,img,iframe,abbr{border:0;}
+i,cite,em,var,address,dfn{font-style:normal;}
+[hidefocus],summary{outline:0;}
+li{list-style:none;}
+h1,h2,h3,h4,h5,h6,small{font-size:100%;}
+sup,sub{font-size:83%;}
+pre,code,kbd,samp{font-family:inherit;}
+q:before,q:after{content:none;}
+textarea{overflow:auto;resize:none;}
+label,summary{cursor:default;}
+h1,h2,h3,h4,h5,h6,em,strong,b{font-weight:bold;}
+a{color: #666666;}
+/*启动页*/
+.start{position: relative;}
+input{border: 0!important;font-size: .3rem!important;}
+.start button{position: absolute;width: 30%;height: .8rem;border-radius: .1rem;display: flex;justify-content: center;align-items: center;left: 35%;bottom:1rem;border: 0;background: burlywood;color: white;}
+/*首页*/
+.index{position: relative;}
+.index .alert{height: 100%;width: 100%;position: absolute;top: 0;transition: all .6s;background: rgba(0,0,0,.3);z-index: 999;left: -100%;}
+.index .alertmain{width: 70%;background: white;height: 100%;overflow: hidden;}
+.index .main{position: relative;}
+.index .top{width: 100%;height: 1rem;display: flex;align-items: center;color: white;background: #F63415;}
+.index .userimg,.index .order{width: 25%;}
+.index .adress{flex: 1;text-align: center;}
+.index .userimg img{width: .5rem;height: .5rem;border-radius: 50%;margin-top: .1rem;}
+.index .userimg{text-indent: .25rem;}
+.index .order{text-align: right;padding-right: .25rem;box-sizing: border-box;white-space: nowrap;font-size: 12px;}
+.index .botttom{position: absolute;bottom: 0;left: 0;width: 100%;height: 1rem;display: flex;align-items: center;background: #F63415;color: white;}
+.index .bottom-item{flex: 1;display: flex;flex-direction: column;justify-content: center;align-items: center;background: #F63415;}
+.index .bottom-item img{width: .5rem;height: .5rem;border-radius: 50%;}
+.index .alert-top{width: 100%;height: 1rem;display: flex;margin-top: .5rem;}
+.index .alert-top div{flex: 1;}
+.index .alert-top .avatar{display: flex;justify-content: center;align-items: center;}
+.index .alert-top .avatar img{width: 1rem;height: 1rem;border-radius: 50%;}
+.index .alert-top .user-name{display: flex;flex-direction: column;justify-content: center;}
+.index .alert-top .charge{display: flex;align-items: flex-end;justify-content: flex-end;}
+.index .alert-top .charge span{border: 1px solid gainsboro;border-radius: 5px;padding: 0 5px;margin-right: .25rem;}
+.index .alert-content{width: 100%;border-top: 1px solid gainsboro;border-bottom: 1px solid gainsboro;margin-top: .2rem;padding: .3rem 0;}
+.index .alert-item{width: 95%;margin: 0 auto;height: .7rem;line-height: .7rem;font-size: .25rem;display: flex;justify-content: space-between;}
+.index .item-arr,.index .item-arr span{width: .5rem;height: .5rem;font-size: .3rem;}
+.index .alert-item:last-of-type{border: 0;}
+/*帮我送*/
+.take{position: relative;overflow: hidden;}
+.take-top{position: absolute;top: 0;left: 0;width: 100%;height: .8rem;display: flex;align-items: center;background: #F63415;color: white;}
+.back,.take .take-top .price{width: 25%;background: #F63415;}
+.take .take-top .top-main{flex:1;display: flex;justify-content: center;background: #F63415;}
+.take .take-top .price{font-size: .25rem;text-align: right;box-sizing: border-box;padding-right: .25rem;}
+.take .take-top .mui-icon{color: white;font-size: .4rem}
+.take-main{margin-top: .8rem;}
+.take textarea,.take .take-area{flex:1;height: 2rem;}
+.take-bottom{position: fixed;bottom: 0;width: 100%;height: 1rem;display: flex;align-items: center;background: #F63415;justify-content: center;color: white;}
+.take .take-item{width: 7rem;margin:0 auto;}
+.take .take-name{border-bottom: 1px solid #F63415;height: .7rem;line-height: .7rem;}
+.take .take-name span{float: right;font-size: .25rem;}
+.take input{margin: 0;}
+.take .iphone-name{height: .5rem;line-height: .5rem;display: flex;justify-content: space-between;width: 6.5rem;margin: 0 auto;}
+.take .takeAdress{width: 6.5rem;margin: 0 auto;}
+.take .adressdetail{font-size: .25rem;color: #999999;}
+.take textarea{width: 6.5rem;height: 2rem;margin: .1rem auto;display: block;}
+.take .take-text{margin: .1rem auto;}
+.take .alert-bottom{position: fixed;bottom: 0;left: 0;width: 100%;display: flex;background: white;box-shadow: 0 0 5px 5px gainsboro;}
+.take .bottom-item{display: flex;align-content: center;justify-content: center;flex-direction: column;flex: 1;height: 1.5rem;border-right: 1px solid gainsboro;}
+.take .bottom-item img{width: .5rem;height: .5rem;margin: 0 auto .2rem;}
+.take .bottom-item span{text-align: center;}
+/*常用地址*/
+.alway .alway-item{width: 7rem;height: 1rem;display: flex;align-items: center;margin:0 auto;}
+.alway .alway-img{width: .7rem;}
+.alway .alway-img img{width: .5rem;height: .5rem;}
+.alway .alway-main{flex: 1;}
+.alway .alway-title{font-size: .3rem;}
+.alway .alway-text{font-size: .25rem;color: #999999;}
+.alway .alway-delete{color: white;background: #F63415;font-size: .25rem;display: flex;justify-content: center;align-items: center;height: .7rem;width: 2rem;transition: all 1s;}
+.home .home-top{position: fixed;top: 1rem;width: 100%;background: white;box-shadow: 0 2px 5px 2px gainsboro;}
+.home-top input{border: 0;margin: 0;padding: 0;height: .7rem;}
+.home-top .home-adress{;width: 7rem;margin: 0 auto;display: block;}
+.home .home-adress{display: flex;justify-content: space-between;}
+.home .home-adress input{flex: 1;}
+/*路径*/
+.orderInform{width:100%;height: 1rem;position: fixed;bottom: 0;left: 0;background: rgba(0,0,0,0.5);color: white;font-weight: 600;}
+.ordertime{height: 1rem;height: 1rem;text-indent: .2rem;line-height: 1rem;font-size: .3rem;}
+/*我的订单*/
+.back .mui-icon{color: white!important;}
+#content{width: 7rem;margin: 0 auto;}
+.order .order-tab{display: flex;}
+.order .tabbar{flex: 1;display: flex;justify-content: center;align-items: center;box-sizing: border-box;border-bottom:1px solid gainsboro;height: 1rem;transition: all .4s;}
+.order .nav-active{border-bottom: 4px solid gainsboro;}
+.order .order-main{width: 7rem;margin: 0 auto;}
+.order .order-item{border-bottom: 1px solid gainsboro;margin: .1rem auto;padding-bottom: .1rem;}
+.order .order-adress{margin: .2rem auto 0;}
+.order .order-detail{margin: .1rem auto;font-size: .25rem;color: #999999;}
+.order .order-operation{display: flex;justify-content: space-between;}
+.order .orde-ratings{color: #F63415;font-size: .4rem;}
+.order .orde-money{color: #F63415;display: flex;justify-content: center;align-items: center;padding: .1rem .2rem;border: 1px solid #F63415;border-radius: .1rem;}
+.order .order-state{display: flex;align-items: center;font-size: .28rem;color:#666666}
+/*申请加入*/
+.join #content{min-height: 100%;padding-bottom: 1rem;}
+.join .agree{width:5rem;height: .7rem;display: flex;justify-content: center;align-items: center;border:1px solid  #F63415;border-radius: .1rem;margin: -2rem auto 0;color: #F63415;}
+.join .form-group{height: 1rem;border-bottom: 1px solid gainsboro;position:relative;display: flex;justify-content: space-between;overflow: hidden;}
+.join .form-group input{height: 1rem;margin: 0;padding: 0;flex: 1;text-align: right;font-size: .25rem;}
+.join .form-group .group-title{width: 2rem;display: flex;align-items: center;font-size: .25rem;}
+.join .form-group input[type='file']{width: 100%;opacity: 0;position: relative;z-index: 99;}
+.join .form-group img{height: 1rem;position: absolute;right: 0;top: 0;}
+.join #mysub{width: 5rem;height: .7rem;color: #F63415;border: 1px solid #F63415!important;border-radius: .1rem;display: flex;justify-content: center;align-items: center;background: white;margin: .5rem auto 0;}
+/*充值*/
+.charge .charge-tab{display: flex;}
+.charge .tab-item{flex: 1;display: flex;justify-content: center;align-items: center;height: 1.5rem;flex-direction: column;border-bottom: 1px solid #F63415;}
+.charge .tab-moey{color: #F63415;font-size: .4rem;font-weight: bold;margin-bottom: .1rem;}
+.charge input{width: 6rem;margin: 0 auto;}
+.charge .button{width: 6rem;margin: .4rem auto;color: #F63415;border: 1px solid #F63415;display: flex;justify-content: center;align-items: center;height: .6rem;border-radius: .1rem;}
+.form-group .mui-icon{display: flex;align-items: center;}
+/*订单*/
+.ratings .take-main{padding-top: .2rem;}
+.ratings .ratings-group{width: 7rem;margin: 0 auto;}
+.ratings .ratings-title{width: 100%;height: .7rem;line-height: .7rem;font-size: .3rem;}
+.ratings .ratings-text{width: 6.5rem;margin: 0 auto;font-size: .25rem;color: #666666;}
+.ratings .money{height: 1rem;color: red;display: flex;justify-content: center;align-items: center;font-size: .5rem;}

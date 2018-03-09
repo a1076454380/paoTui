@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="chrome=1">
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+		<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/base.css" />
+		<script src="css/rem.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="https://cdn.bootcss.com/vue/2.5.9/vue.min.js"></script>
+		<style type="text/css">
+			body,
+			html,
+			.main,
+			.index {
+				height: 100%;
+				margin: 0px;
+			}
+			#container {
+				width: 100%;
+				height: calc(100% - 1rem);
+				height: -webkit-calc(100% - 1rem);
+			}
+		</style>
+		<title>事件系统</title>
+	</head>
+
+	<body>
+		<div class="index home" id="app">
+			<div class="main">
+				<div class="top">
+					<div class="userimg" style="display: flex;justify-content: flex-start;text-indent:0">
+						<span class="mui-icon mui-icon-arrowleft mui-action-back"></span>
+					</div>
+					<div class="adress">
+						常用地址添加
+					</div>
+					<div class="order" @click="opennew">
+						保存
+					</div>
+				</div>
+				<div id="container" tabindex="0"></div>
+				<div class="home-top">
+					<input type="text" name="" id="adreess" value="" placeholder="点击地图选择位置" class="home-adress" v-model="badress"/>
+					<input type="text" name="" id="" value="" placeholder="补充地址：门牌号码，楼层，房间号等" class="home-adress" v-model="sadress"/>
+					<div class="input-group home-adress">
+						<input type="text" name="" id="" value="" placeholder="联系人" v-model="name"/>
+						<input type="number" name="" id="" placeholder="联系方式" v-model="phone"/>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.2&key=a183eb8bdb7770ee13ee24a32b00ebec"></script>
+		<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.3&key=a183eb8bdb7770ee13ee24a32b00ebec&plugin=AMap.Geocoder"></script>
+		<script type="text/javascript">
+			var myvue=new Vue({
+				el:"#app",
+				data:{
+					badress:'',
+					sadress:'',
+					phone:'',
+					name:''
+				},
+				mounted:function(){
+					var that=this
+					document.addEventListener('plusready', onPlusReady, false);
+					// 扩展API加载完毕，现在可以正常调用扩展API
+					function onPlusReady() {
+						plus.webview.close('take')
+						plus.geolocation.getCurrentPosition(function(p) {
+							var map = new AMap.Map('container', {
+								resizeEnable: true,
+								zoom: 15,
+								center: [p.coords.longitude, p.coords.latitude]
+							});
+							var marker = new AMap.Marker({
+								position: [p.coords.longitude, p.coords.latitude],
+								map: map //创建时直接赋予map属性
+							});
+							var jdu = [],
+								name = '';
+								regeocoder([p.coords.longitude, p.coords.latitude])
+							var _onClick = function(e) {
+								new AMap.Marker({
+									position: e.lnglat,
+									map: map
+								})
+								jdu = e.lnglat
+								regeocoder(e.lnglat)
+							}
+							var clickListener;
+							clickListener = AMap.event.addListener(map, "click", _onClick);
+						    function regeocoder(lnglatXY) {  //逆地理编码
+						        var geocoder = new AMap.Geocoder({
+						            radius: 1000,
+						            extensions: "all"
+						        });        
+						        geocoder.getAddress(lnglatXY, function(status, result) {
+						            if (status === 'complete' && result.info === 'OK') {
+						                geocoder_CallBack(result);
+						            }
+						        });        
+						        var marker = new AMap.Marker({  //加点
+						            map: map,
+						            position: lnglatXY
+						        });
+						        map.setFitView();
+						    }
+						    function geocoder_CallBack(data) {
+						        var address = data.regeocode.formattedAddress; //返回地址描述
+						        that.badress=address
+						    }
+						}, function(e) {
+							alert('位置获取失败，请稍后重试');
+						});
+					}
+				},
+				methods:{
+					opennew:function(){
+						var mtype=localStorage.getItem('mtype')
+							localStorage.setItem(mtype,this.badress)
+							localStorage.setItem(mtype+'detail',this.sadress)
+							localStorage.setItem(mtype+'iphone',this.phone)
+							localStorage.setItem(mtype+'name',this.name)
+							mui.openWindow({
+								url:localStorage.getItem('adresstarget')+'.html',
+								id:localStorage.getItem('adresstarget')
+							})
+					}
+				}
+			})
+		</script>
+	</body>
+
+</html>

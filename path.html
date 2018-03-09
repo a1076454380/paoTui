@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+		<title>按起终点名称规划路线</title>
+		<script src="https://cdn.bootcss.com/vue/2.5.9/vue.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/base.css"/>
+		<link rel="stylesheet" type="text/css" href="css/mui.min.css"/>
+		<script src="css/rem.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			html,body,#app{width: 100%;height: 100%;}
+			#container {
+				position: fixed;
+				background-color: white;
+				top: .8rem;
+				left: 0;
+				width: 100%;
+				height: calc(100% - 1rem);
+			}
+		</style>
+		<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.3&key=a183eb8bdb7770ee13ee24a32b00ebec&plugin=AMap.Walking"></script>
+	</head>
+
+	<body>
+		<div class="take" id="app">
+			<div class="take-top">
+				<div class="back">
+					<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+				</div>
+				<div class="top-main">
+					帮我取
+				</div>
+				<div class="price" @click="opennew">
+					我的订单
+				</div>
+			</div>
+			<div id="container"></div>
+			<div id="panel" v-show="false"></div>
+			<div class="orderInform">
+				<div class="ordertime">
+					约{{length}}公里，用时{{time}}，总价{{price}}元
+				</div>
+			</div>
+		</div>
+		
+		<script type="text/javascript">
+			var myvue = new Vue({
+				el: '#app',
+				data: {
+					length: '',
+					time: '',
+					price: 0
+				},
+				mounted: function(){
+					var that=this
+					var map = new AMap.Map("container", {
+						resizeEnable: true,
+						center: [116.397428, 39.90923], //地图中心点
+						zoom: 13 //地图显示的缩放级别
+					});
+//					步行导航
+					var walking = new AMap.Walking({
+						map: map,
+						panel: "panel"
+					});
+					AMap.service('AMap.Driving', function() { //回调函数
+						//实例化Driving
+						driving = new AMap.Driving({
+							city: '徐州市'
+						});
+//						TODO: 使用driving对象调用驾车路径规划相关的功能
+					})
+					walking.search([{
+							keyword: localStorage.getItem('shuo'),
+							city: '徐州'
+						},
+						{
+							keyword: localStorage.getItem('qhuo'),
+							city: '徐州'
+						}
+					], function(status, result) {
+						var alllength=result.routes[0].distance
+						that.length=alllength/1000
+						var alltime = result.routes[0].time
+							var theTime = parseInt(alltime); // 秒 
+							var theTime1 = 0; // 分 
+							var theTime2 = 0; // 小时 
+							if(theTime > 60) {
+								theTime1 = parseInt(theTime / 60);
+								theTime = parseInt(theTime % 60);
+								if(theTime1 > 60) {
+									theTime2 = parseInt(theTime1 / 60);
+									theTime1 = parseInt(theTime1 % 60);
+								}
+							}
+							var result = "" + parseInt(theTime) + "秒";
+							if(theTime1 > 0) {
+								result = "" + parseInt(theTime1) + "分" + result;
+							}
+							if(theTime2 > 0) {
+								result = "" + parseInt(theTime2) + "小时" + result;
+							}
+							that.time=result
+					});
+				},
+				methods:{
+					opennew:function(){
+						mui.openWindow({
+							url:'myorder.html',
+							id:'myorder'
+						})
+					}
+				}
+			})
+		</script>
+	</body>
+
+</html>

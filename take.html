@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/base.css" />
+		<script src="css/rem.js" type="text/javascript" charset="utf-8"></script>
+		<script src="https://cdn.bootcss.com/vue/2.5.9/vue.min.js"></script>
+		<script src="js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			.fold-enter-active,
+			.fold-leave-active {
+				transition: all .6s;
+			}
+			
+			.fold-enter,
+			.fold-leave-active {
+				transition: all .6s;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="app" class="take">
+			<div class="take-top">
+				<div class="back">
+					<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+				</div>
+				<div class="top-main">
+					帮我取
+				</div>
+				<div class="price">
+					价格详情
+				</div>
+			</div>
+			<div class="take-main">
+				<div class="take-item">
+					<div class="take-name">
+						取货类型:
+					</div>
+					<div class="take-text">
+						<input type="text" name="" id="" value="" placeholder="美食，其他" />
+					</div>
+				</div>
+				<div class="take-item" @click="opennew('qhuo')">
+					<div class="take-name">
+						取货人信息:
+						<span @click="commonly('qhuo')">
+							常用地址
+						</span>
+					</div>
+					<div class="take-text">
+						<div class="iphone-name">
+							<div class="name">
+								{{qhuoname}}
+							</div>
+							<div class="iphone">
+								{{qhuoiphone}}
+							</div>
+						</div>
+						<div class="takeAdress">
+							<div class="adress">
+								{{qhuo}}
+								<span v-show="qhuo==''">请点击选择地址</span>
+							</div>
+							<div class="adressdetail">
+								{{qhuodetail}}
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="take-item" @click="opennew('shuo')">
+					<div class="take-name">
+						收货人信息:
+						<span @click="commonly('shuo')">
+							常用地址
+						</span>
+					</div>
+					<div class="take-text">
+						<div class="iphone-name">
+							<div class="name">
+								{{shuoname}}
+							</div>
+							<div class="iphone">
+								{{shuoiphone}}
+							</div>
+						</div>
+						<div class="takeAdress">
+							<div class="adress">
+								{{shuo}}
+								<span v-show="shuo==''">请点击选择地址</span>
+							</div>
+							<div class="adressdetail">
+								{{shuodetail}}
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="take-item">
+					<div class="take-name">
+						取货时间:
+					</div>
+					<div class="take-text">
+						<input type="datetime-local" name="" id=""  v-model="time"/>
+					</div>
+				</div>
+				<div class="take-item">
+					<div class="take-name">
+						留言:
+					</div>
+					<div class="take-text">
+						<textarea name="" rows="" cols="">
+							
+						</textarea>
+					</div>
+				</div>
+			</div>
+			<div class="take-bottom" @click="go">
+				发布任务
+			</div>
+			<transition name='fold'>
+				<div class="alert-bottom" v-show="com">
+					<div class="bottom-item" @click="adress(home)">
+						<img src="img/mhome.png" alt="" />
+						<span>
+							家的位置
+						</span>
+					</div>
+					<div class="bottom-item" @click="adress(comm)">
+						<img src="img/mcompany.png" alt="" />
+						<span>
+							公司的位置
+						</span>
+					</div>
+				</div>
+			</transition>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var myvue = new Vue({
+			el: '#app',
+			data: {
+				qhuo: localStorage.getItem('qhuo'),
+				qhuodetail: localStorage.getItem('qhuodetail'),
+				qhuoiphone: localStorage.getItem('qhuoiphone'),
+				qhuoname: localStorage.getItem('qhuoname'),
+				shuo: localStorage.getItem('shuo'),
+				shuodetail: localStorage.getItem('shuodetail'),
+				shuoiphone: localStorage.getItem('shuoiphone'),
+				shuoname: localStorage.getItem('shuoname'),
+				com: false,
+				mytype: '',
+				time:'2016-01-11T16:00:00'
+			},
+			methods: {
+				opennew: function(mtype) {
+					localStorage.setItem('mtype', mtype)
+					localStorage.setItem('adresstarget', 'take')
+					mui.openWindow({
+						url: 'adress.html',
+						id: 'adress'
+					})
+				},
+				go: function() {
+					if(time=='2016-01-11T16:00:00'){
+						mui.toast('请选择时间')
+					}else{
+						mui.openWindow({
+							url: 'path.html',
+							id: 'path'
+						})
+					}
+				},
+				commonly: function(mtype) {
+					this.com = !this.com
+					this.mytype = mtype
+				},
+				adress: function(mtype) {
+					localStorage.setItem(this.mtype, this.badress)
+					localStorage.setItem(this.mtype + 'detail', this.sadress)
+					localStorage.setItem(this.mtype + 'iphone', this.phone)
+					localStorage.setItem(this.mtype + 'name', this.name)
+				}
+			},
+			mounted:function(){
+				document.addEventListener('plusready', onPlusReady, false);
+				function onPlusReady() {
+					plus.webview.close('adress')
+				}
+			}
+		})
+	</script>
+
+</html>

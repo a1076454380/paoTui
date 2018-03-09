@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/mui.min.css"/>
+		<link rel="stylesheet" type="text/css" href="css/base.css" />
+		<script src="css/rem.js" type="text/javascript" charset="utf-8"></script>
+		<script src="https://cdn.bootcss.com/vue/2.5.9/vue.min.js"></script>
+		<script src="js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app" class="index order">
+			<div class="main">
+				<div class="top">
+					<div class="back">
+						<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+					</div>
+					<div class="adress">
+						跑腿订单
+					</div>
+					<div class="order">
+						
+					</div>
+				</div>
+				<div id="content">
+					<div class="order-tab">
+						<div class="tabbar" :class="nav?'nav-active':''" @click="tab('on')">
+							已完成的订单
+						</div>
+						<div class="tabbar" :class="nav?'':'nav-active'" @click="tab('on')">
+							进行中的订单
+						</div>
+					</div>
+					<div class="order-main" v-show="nav">
+						<div class="order-item" @click="opennew('ratings')">
+							<div class="order-adress">
+								江苏省徐州市贾汪区
+							</div>
+							<div class="order-detail">
+								26栋604
+							</div>
+							<div class="order-operation">
+								<div class="order-state">
+									已完成
+								</div>
+								<div class="orde-money">
+									删除订单
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="order-main" v-show="!nav">
+						<div class="order-item" @click="opennew('inratings')">
+							<div class="order-adress">
+								江苏省徐州市贾汪区
+							</div>
+							<div class="order-detail">
+								26栋604
+							</div>
+							<div class="order-operation">
+								<div class="order-state">
+									进行中
+								</div>
+								<div class="orde-money">
+									确认完成
+								</div>
+							</div>
+						</div>
+						<div class="order-item">
+							<div class="order-adress">
+								江苏省徐州市贾汪区
+							</div>
+							<div class="order-detail">
+								26栋604
+							</div>
+							<div class="order-operation">
+								<div class="order-state">
+									投诉中
+								</div>
+								<div class="orde-money">
+									取消投诉
+								</div>
+							</div>
+						</div>
+						<div class="order-item" @click="opnnew('ratings')">
+							<div class="order-adress">
+								江苏省徐州市贾汪区
+							</div>
+							<div class="order-detail">
+								26栋604
+							</div>
+							<div class="order-operation">
+								<div class="order-state">
+									等待接单中
+								</div>
+								<div class="orde-money">
+									放弃订单
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.3&key=a183eb8bdb7770ee13ee24a32b00ebec"></script> 
+	<script type="text/javascript">
+		var myvue=new Vue({
+			el:'#app',
+			data:{
+				nav:true
+			},
+			mounted:function(){
+
+			},
+			methods:{
+				tab:function(){
+					this.nav=!this.nav
+				},
+				opennew:function(target){
+					mui.openWindow({
+						url:target+'.html',
+						id:target
+					})
+				}
+			}
+		})
+	</script>
+</html>
